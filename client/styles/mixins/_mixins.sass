@@ -1,0 +1,38 @@
+$ppd: 34px
+
+@mixin blueBtn($width, $height)
+  width: $width
+  height: $height
+  background: #5779F0
+  box-shadow: 0px 10px 20px rgba(31, 63, 174, 0.06), 0px 2px 6px rgba(31, 63, 174, 0.06), 0px 0px 1px rgba(31, 63, 174, 0.06)
+  border-radius: 100px
+  color: #fff
+  font-weight: bold
+
+@mixin blueLabel
+  font-weight: 600
+  font-size: 14px
+  line-height: 170%
+  letter-spacing: 0.01em
+  color: #5779F0
+
+@mixin centerMix
+  display: flex
+  align-items: center
+  justify-content: center
+
+@mixin dashedButton($width, $height)
+  background-color: #fff
+  border: 1px dashed #5779F0
+  border-radius: 100px
+  color: #5779F0
+  font-weight: bold
+  height: $height
+  width: $width
+
+@mixin SubMainHeader($mb)
+  font-size: 33px
+  font-weight: 600
+  line-height: 130%
+  color: #0D1D52
+  margin-bottom: $mb
