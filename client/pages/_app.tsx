@@ -5,9 +5,10 @@ import type { AppProps } from "next/app";
 import React, { FC, useEffect, useState } from "react";
 import withRedux from "next-redux-wrapper";
 import { makeStore } from "../redux/store";
+import "./../styles/sections/EnterSection.sass";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+    return <Component {...pageProps} />;
 };
 
 export default withRedux(makeStore)(MyApp);

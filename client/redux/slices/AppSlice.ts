@@ -1,26 +1,24 @@
-import {createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AppThunk } from '../store'
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppThunk } from "../store";
 
 export interface appState {
-  isLoading: boolean
+    isLoading: boolean;
 }
 
 const initialState: appState = {
-  isLoading: true
-}
+    isLoading: true
+};
 
 export const appReducer = createSlice({
-  name: 'app',
-  initialState,
-  reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload
-    }
-  },
-  extraReducers: (builder) => {
+    name: "app",
+    initialState,
+    reducers: {
+        setLoading: (state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload;
+        }
+    },
+    extraReducers: (builder) => {}
+});
+export const { setLoading } = appReducer.actions;
 
-  }
-})
-export const { setLoading } = appReducer.actions
-
-export default appReducer.reducer
+export default appReducer.reducer;
