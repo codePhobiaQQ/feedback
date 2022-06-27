@@ -2,7 +2,7 @@
 @import "./../mixins/vars"
 
 .LkMainPage
-  padding-top: calc(#{$index} * 1.8)
+  padding: calc(#{$index} * 1.8) 0
 
 .LkCreateSession
   margin-bottom: calc(#{$index} * 3)
@@ -29,11 +29,41 @@
       width: 100%
 
 .LkSessionList
-   h2
+  h2
     font-size: calc(#{$index} * 1.3)
     font-weight: 700
     color: $accentSecond
     text-align: center
     margin-bottom: calc(#{$index} * 1)
+  ul
+    li.LkSessionListElem
+      margin-bottom: $px14
+      &:last-child
+        margin-bottom: 0
+      a
+        width: 100%
+        background-color: #fff
+        padding: calc(#{$index} * 1)
+        display: flex
+        align-items: center
+        justify-content: space-between
+        .LeftSide
+          .LeftSideWrapper
+            display: flex
+            align-items: center
+            margin-bottom: $px20
+            h3
+              color: #000
+              font-size: $px20
+              font-weight: 700
+              margin-right: $px12
+            span
+              colro: #484848
+          h4
+            font-size: $px18
+        .RightSide
+          button
+            @include oftenBtn
+            font-weight: 600
 
 

@@ -1,4 +1,5 @@
-import React from "react";
+import Link from "next/link";
+import LkListElem from "./LkListElem";
 
 const LkSessionsList = () => {
   return (
@@ -6,7 +7,30 @@ const LkSessionsList = () => {
       <div className="container">
         <h2>Active sessions:</h2>
         <ul>
-          <li>1</li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
+          <li className="LkSessionListElem">
+            <LkListElem />
+          </li>
         </ul>
       </div>
     </section>
