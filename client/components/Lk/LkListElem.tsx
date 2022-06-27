@@ -1,8 +1,16 @@
 import Link from "next/link";
+import { IListElem } from "./LkSessionsList";
 
-const LkListElem = () => {
+const LkListElem = ({
+  TitleCourse,
+  TitleSession,
+  day,
+  id,
+  month,
+  year
+}: IListElem) => {
   return (
-    <Link href="#">
+    <Link href={`/lk/session/${id}`}>
       <a>
         <div className="LeftSide">
           <div className="LeftSideWrapper">

@@ -1,6 +1,6 @@
-import Header from "../hoc/Header";
-import LkCreateSession from "../components/Lk/LkCreateSession";
-import LkSessionsList from "../components/Lk/LkSessionsList";
+import Header from "../../hoc/Header";
+import LkCreateSession from "../../components/Lk/LkCreateSession";
+import LkSessionsList from "../../components/Lk/LkSessionsList";
 
 const Lk = () => {
   return (
