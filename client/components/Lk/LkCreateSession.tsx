@@ -22,19 +22,16 @@ const LkCreateSession = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const result = {
       ...data,
-      // @ts-ignore
       day: monthSelect.current?.getValue()[0].value,
-      // @ts-ignore
       month: monthSelect.current?.getValue()[0].value,
-      // @ts-ignore
       year: monthSelect.current?.getValue()[0].value
     };
     console.log(result);
   };
 
-  const daySelect = useRef(null);
-  const monthSelect = useRef(null);
-  const yearSelect = useRef(null);
+  const daySelect = useRef<any>(null);
+  const monthSelect = useRef<any>(null);
+  const yearSelect = useRef<any>(null);
 
   const DaysOptions = days();
   const MonthsOptions = months();
