@@ -5,6 +5,8 @@ import { tabs } from "../../sections/EnterSection";
 import { Dispatch, SetStateAction } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FadeInMotion } from "../../motions/FadeMotion";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 interface IRegisterForm {
   activeTab: tabs;
@@ -14,7 +16,22 @@ interface IRegisterForm {
 interface Inputs {
   Email: string;
   Password: string;
+  RepeatPassword: string;
 }
+
+const schema = yup
+  .object({
+    Email: yup
+      .string()
+      .email("Incorrect Email")
+      .required("Email can`t be empty"),
+    RepeatPassword: yup
+      .string()
+      .oneOf([yup.ref("Password"), null], "Your passwords do not match.")
+      .required("Can`t be empty"),
+    Password: yup.string().required("Password can`t be empty")
+  })
+  .required();
 
 const RegistrationForm = ({ activeTab, setActiveTab }: IRegisterForm) => {
   const {
@@ -22,8 +39,10 @@ const RegistrationForm = ({ activeTab, setActiveTab }: IRegisterForm) => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<Inputs>();
-  // { resolver: yupResolver(schema) }
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema),
+    mode: "onSubmit"
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
@@ -58,6 +77,10 @@ const RegistrationForm = ({ activeTab, setActiveTab }: IRegisterForm) => {
             </motion.div>
 
             <motion.div variants={FadeInMotion(4)} className="inputWrapper">
+              {errors.Password ? (
+                <p className="errorLabel">{errors.Password?.message}</p>
+              ) : null}
+              <PasswordSvg />
               <PasswordSvg />
               <input
                 placeholder="Enter your password"
@@ -65,10 +88,23 @@ const RegistrationForm = ({ activeTab, setActiveTab }: IRegisterForm) => {
                 type="password"
               />
             </motion.div>
-            <motion.button variants={FadeInMotion(5)} type="submit">
+
+            <motion.div variants={FadeInMotion(5)} className="inputWrapper">
+              {errors.RepeatPassword ? (
+                <p className="errorLabel">{errors.RepeatPassword?.message}</p>
+              ) : null}
+              <PasswordSvg />
+              <PasswordSvg />
+              <input
+                placeholder="Repeat your password"
+                {...register("Password", { required: true })}
+                type="password"
+              />
+            </motion.div>
+            <motion.button variants={FadeInMotion(6)} type="submit">
               Log In
             </motion.button>
-            <motion.p variants={FadeInMotion(6)} className="switcher">
+            <motion.p variants={FadeInMotion(7)} className="switcher">
               Already registered?{" "}
               <span onClick={() => setActiveTab(0)}>Login.</span>
             </motion.p>

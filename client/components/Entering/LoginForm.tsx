@@ -3,8 +3,8 @@ import { tabs } from "../../sections/EnterSection";
 import { useForm, SubmitHandler } from "react-hook-form";
 import PasswordSvg from "../svg/PasswordSvg";
 import MainSvg from "../svg/MainSvg";
-// import { yupResolver } from "@hookform/resolvers/yup;
-// import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { motion, AnimatePresence } from "framer-motion";
 import { FadeInMotion } from "../../motions/FadeMotion";
 
@@ -18,12 +18,15 @@ interface Inputs {
   Password: string;
 }
 
-// const schema = yup
-//   .object({
-//     email: yup.string().email().required("Incorrect Email")
-//     // password: yup.number().positive().integer().required()
-//   })
-//   .required();
+const schema = yup
+  .object({
+    Email: yup
+      .string()
+      .email("Incorrect Email")
+      .required("Email can`t be empty"),
+    Password: yup.string().required("Password can`t be empty")
+  })
+  .required();
 
 const LoginForm = ({ activeTab, setActiveTab }: ILoginForm) => {
   const {
@@ -31,8 +34,9 @@ const LoginForm = ({ activeTab, setActiveTab }: ILoginForm) => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<Inputs>();
-  // { resolver: yupResolver(schema) }
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema)
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
@@ -67,6 +71,9 @@ const LoginForm = ({ activeTab, setActiveTab }: ILoginForm) => {
             </motion.div>
 
             <motion.div variants={FadeInMotion(4)} className="inputWrapper">
+              {errors.Password ? (
+                <p className="errorLabel">{errors.Password?.message}</p>
+              ) : null}
               <PasswordSvg />
               <input
                 placeholder="Enter your password"
