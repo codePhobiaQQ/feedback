@@ -9,11 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SessionModule = void 0;
 const common_1 = require("@nestjs/common");
 const session_controller_1 = require("./session.controller");
+const session_service_1 = require("./session.service");
+const sequelize_1 = require("@nestjs/sequelize");
+const user_model_1 = require("../users/user.model");
+const session_model_1 = require("./session.model");
 let SessionModule = class SessionModule {
 };
 SessionModule = __decorate([
     (0, common_1.Module)({
-        controllers: [session_controller_1.SessionController]
+        controllers: [session_controller_1.SessionController],
+        providers: [session_service_1.SessionService],
+        imports: [sequelize_1.SequelizeModule.forFeature([user_model_1.User, session_model_1.Session])]
     })
 ], SessionModule);
 exports.SessionModule = SessionModule;
