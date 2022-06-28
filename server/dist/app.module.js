@@ -16,6 +16,7 @@ const roles_module_1 = require("./roles/roles.module");
 const role_module_1 = require("./roles/role.module");
 const user_roles_model_1 = require("./roles/user-roles.model");
 const auth_module_1 = require("./auth/auth.module");
+const session_module_1 = require("./session/session.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -40,6 +41,7 @@ AppModule = __decorate([
             users_module_1.UsersModule,
             roles_module_1.RolesModule,
             auth_module_1.AuthModule,
+            session_module_1.SessionModule,
         ],
     })
 ], AppModule);

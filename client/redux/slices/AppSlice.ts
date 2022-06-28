@@ -6,7 +6,7 @@ export interface appState {
 }
 
 const initialState: appState = {
-    isLoading: true
+    isLoading: false
 };
 
 export const appReducer = createSlice({

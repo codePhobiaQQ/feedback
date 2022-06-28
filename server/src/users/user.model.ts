@@ -9,7 +9,6 @@ import { UserRoles } from 'src/roles/user-roles.model';
 import { Role } from '../roles/role.module';
 
 interface UserCreationAttributes {
-  login: string;
   email: string;
   password: string;
 }
@@ -29,21 +28,7 @@ export class User extends Model<User, UserCreationAttributes> {
     unique: true,
     allowNull: false,
   })
-  login: string;
-
-  @Column({
-    type: DataType.STRING,
-    unique: true,
-    allowNull: false,
-  })
   email: string;
-
-  @Column({
-    type: DataType.STRING,
-    unique: true,
-    allowNull: true,
-  })
-  phone: string;
 
   @Column({
     type: DataType.STRING,
@@ -56,6 +41,13 @@ export class User extends Model<User, UserCreationAttributes> {
     defaultValue: false,
   })
   banned: boolean;
+
+  @Column({
+    type: DataType.STRING,
+    defaultValue: "Anonimus",
+    allowNull: true,
+  })
+  name: string;
 
   @Column({
     type: DataType.STRING,
