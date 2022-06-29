@@ -11,6 +11,9 @@ import { SessionModule } from './session/session.module';
 import { Session } from './session/session.model';
 import { MessageModule } from './message/message.module';
 import { Message } from './message/message.model';
+import { EventEmitter } from 'events';
+import { NestEmitterModule } from 'nest-emitter';
+import {MessageGateway} from "./message.gateway";
 
 @Module({
   controllers: [],
@@ -35,6 +38,8 @@ import { Message } from './message/message.model';
     AuthModule,
     SessionModule,
     MessageModule,
+    MessageGateway,
+    NestEmitterModule.forRoot(new EventEmitter())
   ],
 })
 export class AppModule {}

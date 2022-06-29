@@ -12,4 +12,16 @@ export class MessageService {
   async create(dto: MessageDto) {
     return this.messageRepository.create(dto);
   }
+
+  async getUserMess(id: number) {
+    return this.messageRepository.findAll({where: { userId: id }})
+  }
+
+  async getAnonimMess(id: number) {
+    return this.messageRepository.findAll({where: { anonim: id }})
+  }
+
+  async getSessionMess(id: number) {
+    return this.messageRepository.findAll({where: { sessionId: id }, include: { all: true }})
+  }
 }

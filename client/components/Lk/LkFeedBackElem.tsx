@@ -4,10 +4,12 @@ import { IFeedBack } from "../../pages/lk/session/[:id]";
 interface ILkFeedBackElem {
   isChatOpen: boolean;
   setIsChatOpen: Dispatch<SetStateAction<boolean>>;
+  setWhatMessageOpen: Dispatch<SetStateAction<number>>;
   id: number;
   name: string;
-  messages?: string[];
+  messages?: string;
   rate?: number;
+  anonimId?: number;
 }
 
 const LkFeedBackElem = ({
@@ -16,8 +18,15 @@ const LkFeedBackElem = ({
   name,
   rate,
   isChatOpen,
-  setIsChatOpen
+  setWhatMessageOpen,
+  setIsChatOpen,
+  anonimId
 }: ILkFeedBackElem) => {
+  const clickHandler = () => {
+    setIsChatOpen(true)
+    setWhatMessageOpen(anonimId || 100)
+  }
+
   return (
     <div>
       <div className="LeftSide">
@@ -28,13 +37,13 @@ const LkFeedBackElem = ({
         </div>
         <h4>
           {messages?.length
-            ? `${messages[0].split("").slice(0, 40).join("")}...`
+            ? `${messages}...`
             : null}
         </h4>
       </div>
       <div className="RightSide">
         <button>Report</button>
-        <button onClick={() => setIsChatOpen(true)}>View Details</button>
+        <button onClick={clickHandler}>View Details</button>
       </div>
     </div>
   );

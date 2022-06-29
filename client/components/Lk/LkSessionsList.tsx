@@ -17,16 +17,19 @@ export interface IListElem {
   start?: string;
   end?: string;
   status?: string;
+  fetchSessions?: any;
+  userId?: number;
 }
 
 const LkSessionsList = () => {
   const [sessions, setSessions] = useState<IListElem[]>([])
   const isFetch = useTypedSelector(state => state.app.isFetch)
+  const token = localStorage.getItem('token')
   const dispatch = useDispatch()
 
   async function fetchSessions() {
     try {
-      const {data} = await axios.get(`${back_url}/session/`)
+      const {data} = await axios.get(`${back_url}/session/get-my-session`, {headers: {Authorization: `Bearer ${token}`}})
       setSessions(data)
     } catch (e) {
       console.log(e)
@@ -48,7 +51,7 @@ const LkSessionsList = () => {
   return (
     <section className="LkSessionList">
       <div className="container">
-        <h2>All sessions:</h2>
+        <h2>Active sessions:</h2>
         <ul>
           {sessions.length == 0
             ? <span>No Active sessions yet</span>
@@ -66,6 +69,7 @@ const LkSessionsList = () => {
                 year={el.year}
                 month={el.month}
                 day={el.day}
+                fetchSessions={fetchSessions}
               />
             </li>
           ))}

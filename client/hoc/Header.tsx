@@ -17,9 +17,10 @@ import {AnimatePresence} from "framer-motion";
 
 interface HeaderI {
   children?: React.ReactNode;
+  isAnonim?: boolean;
 }
 
-const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children }) => {
+const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children, isAnonim= false }) => {
   const router = useRouter()
   const isAuth = useTypedSelector(state => state.user.isAuth)
   const isLoading = useTypedSelector(state => state.app.isLoading)
@@ -31,21 +32,21 @@ const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children }) => {
       try {
         dispatch(setLoading(true))
         const token = localStorage.getItem('token')
-        if (isAuth == false && !token) {
+        if (isAuth == false && !token && router.asPath == '/lk') {
           router.push('/')
         }
         if (token) {
-          const {data} = await axios.get(`${back_url}/auth/check`, { headers: { Authorization: `Bearer ${token}` }})
+          const {data} = await axios.get(`${back_url}/auth/check`, {headers: {Authorization: `Bearer ${token}`}})
           if (!data.isAuth) {
             dispatch(clearUser(null))
             router.push('/')
           } else {
             dispatch(setUser(token))
           }
+          setTimeout(() => {
+            dispatch(setLoading(false))
+          }, 400)
         }
-        setTimeout(() => {
-          dispatch(setLoading(false))
-        }, 400)
       } catch (e) {
         setTimeout(() => {
           dispatch(setLoading(false))
@@ -54,7 +55,7 @@ const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children }) => {
       }
     }
     entering()
-  }, [])
+  }, [isAuth])
 
   useEffect(() => {
     if (isFetch) {
@@ -81,7 +82,8 @@ const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children }) => {
       <AnimatePresence>
         {!isLoading &&
           <>
-            <motion.header
+            {isAuth
+              ? <motion.header
               variants={FadeInMotionOpacity(0)}
               initial="hidden"
               animate="visible"
@@ -99,6 +101,8 @@ const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children }) => {
                 <img src={face.src} alt="face"/>
               </div>
             </motion.header>
+              : null }
+
             <motion.div
               variants={FadeInMotion(1)}
               initial="hidden"

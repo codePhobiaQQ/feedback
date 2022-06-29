@@ -13,4 +13,7 @@ export class MessageDto {
 export class TakeMessageDto {
   readonly value: string;
   readonly sessionId: number;
+  readonly userId?: number;
+  readonly anonimus?: number;
+  readonly anonimusName?: string;
 }

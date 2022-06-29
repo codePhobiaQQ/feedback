@@ -20,6 +20,9 @@ const session_module_1 = require("./session/session.module");
 const session_model_1 = require("./session/session.model");
 const message_module_1 = require("./message/message.module");
 const message_model_1 = require("./message/message.model");
+const events_1 = require("events");
+const nest_emitter_1 = require("nest-emitter");
+const message_gateway_1 = require("./message.gateway");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -46,6 +49,8 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             session_module_1.SessionModule,
             message_module_1.MessageModule,
+            message_gateway_1.MessageGateway,
+            nest_emitter_1.NestEmitterModule.forRoot(new events_1.EventEmitter())
         ],
     })
 ], AppModule);

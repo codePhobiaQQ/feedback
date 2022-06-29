@@ -25,6 +25,7 @@ const LkCreateSession = () => {
   });
 
   const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -34,7 +35,9 @@ const LkCreateSession = () => {
         month: monthSelect.current?.getValue()[0].value,
         year: yearSelect.current?.getValue()[0].value
       };
-      const request = await axios.post(`${back_url}/session/`, { ...result })
+      const request = await axios.post(`${back_url}/session/`,
+        { ...result },
+        { headers: {Authorization: `Bearer ${token}`} })
       dispatch(setIsFetch(true))
       console.log(request)
     } catch (e) {

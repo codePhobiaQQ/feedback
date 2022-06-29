@@ -86,6 +86,6 @@ export class Session extends Model<Session, SessionCreationAttributes> {
   @BelongsTo(() => User)
   user: User;
 
-  @HasMany(() => Message)
+  @HasMany(() => Message, { onDelete: 'cascade' })
   messages: Message[];
 }

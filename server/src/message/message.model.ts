@@ -12,7 +12,9 @@ import { Session } from '../session/session.model';
 interface MessageCreationAttributes {
   value: string;
   sessionId: number;
-  userId: number;
+  userId?: number;
+  anonim?: number;
+  anonimName?: string;
 }
 
 @Table({ tableName: 'message' })
@@ -30,6 +32,18 @@ export class Message extends Model<Message, MessageCreationAttributes> {
     allowNull: false,
   })
   value: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  anonim: number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  anonimName: string;
 
   @ForeignKey(() => User)
   @Column({

@@ -1,6 +1,8 @@
 import Link from "next/link";
-import {fixNumbs} from "./../../services/DataGenerator"
+import { fixNumbs } from "./../../services/DataGenerator"
 import { IListElem } from "./LkSessionsList";
+import axios from "axios";
+import { back_url } from "../../vars";
 
 const LkListElem = ({
   TitleCourse,
@@ -8,23 +10,33 @@ const LkListElem = ({
   day,
   id,
   month,
-  year
+  year,
+  fetchSessions,
 }: IListElem) => {
+  const dellHandler = async (e: any) => {
+    e.stopPropagation()
+    await axios.delete(`${back_url}/session/${id}`)
+    fetchSessions()
+  }
+
   return (
-    <Link href={`/lk/session/${id}`}>
-      <a>
-        <div className="LeftSide">
-          <div className="LeftSideWrapper">
-            <h3>{TitleCourse}</h3>
-            <span>{fixNumbs(month)}/{fixNumbs(day)}/{year}</span>
-          </div>
-          <h4>{TitleSession}</h4>
+    <div className="ListElemWrapper">
+      <div className="LeftSide">
+        <div className="LeftSideWrapper">
+          <h3>{TitleCourse}</h3>
+          <span>{fixNumbs(month)}/{fixNumbs(day)}/{year}</span>
         </div>
-        <div className="RightSide">
-          <button>View Details</button>
-        </div>
-      </a>
-    </Link>
+        <h4>{TitleSession}</h4>
+      </div>
+      <div className="RightSide">
+        <button onClick={dellHandler} style={{marginRight: "10px"}}>Dell</button>
+        <Link href={`/lk/session/${id}`}>
+          <a>
+            <button>View Details</button>
+          </a>
+        </Link>
+      </div>
+    </div>
   );
 };
 
