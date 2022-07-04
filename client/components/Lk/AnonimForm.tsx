@@ -93,7 +93,7 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
             type="text"
           />
           <button onClick={firstSubmit}>Submit</button>
-          <span>Fast reactions:</span>
+          <span className="FastReactionsSpan">Fast reactions:</span>
           <ul className="FastReactions">
             <li onClick={() => fastReactionHandler("Cool!")}>Cool!</li>
             <li onClick={() => fastReactionHandler("Sound issues")}>Sound issues</li>
