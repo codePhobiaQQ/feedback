@@ -140,7 +140,7 @@ const SessionPage = () => {
                     />
                   </li>
                 )) :
-                <span className="NoMessages">В данной сессии пока нет сообщений!</span>}
+                <span className="NoMessages">No feedbacks yet.</span>}
               </ul>
               {/*<h3>Send feedback</h3>*/}
               {/*<input value={inputValue} onChange={(e) => setInputValue(e.target.value)} type="text"/>*/}

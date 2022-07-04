@@ -61,6 +61,11 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
     }
   }
 
+  const fastReactionHandler = (text: string) => {
+    setInputValue(text)
+    firstSubmit()
+  }
+
   useEffect(() => {
     anonimId.current = getRandomInt(10000)
   }, [])
@@ -88,6 +93,15 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
             type="text"
           />
           <button onClick={firstSubmit}>Submit</button>
+          <span>Fast reactions:</span>
+          <ul className="FastReactions">
+            <li onClick={() => fastReactionHandler("Cool!")}>Cool!</li>
+            <li onClick={() => fastReactionHandler("Sound issues")}>Sound issues</li>
+            <li onClick={() => fastReactionHandler("It's very stuffy here")}>It's very stuffy here</li>
+            <li onClick={() => fastReactionHandler("Nice English!")}>Nice English!</li>
+            <li onClick={() => fastReactionHandler("Boring")}>Boring</li>
+            <li onClick={() => fastReactionHandler("Let’s have a break!")}>Let’s have a break!</li>
+          </ul>
         </div>
         <div className="RightSide">
           <h2>

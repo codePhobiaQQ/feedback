@@ -27,6 +27,9 @@ const LkListElem = ({
           <span>{fixNumbs(month)}/{fixNumbs(day)}/{year}</span>
         </div>
         <h4>{TitleSession}</h4>
+        <ul className="FastReactions">
+
+        </ul>
       </div>
       <div className="RightSide">
         <button onClick={dellHandler} style={{marginRight: "10px"}}>Delete</button>
