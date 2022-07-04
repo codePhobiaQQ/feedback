@@ -33,6 +33,7 @@ const SessionPage = () => {
   const userId = useTypedSelector(state => state.user.user.id)
   const [isCopy, setIsCopy] = useState<string>("")
   const [isCopyFlag, setIsCopyFlag] = useState<boolean>(false)
+  const [rateProf, setRate] = useState<number>(5)
 
   const route = useRouter()
 
@@ -72,6 +73,15 @@ const SessionPage = () => {
       setFeedback(prevState => [...prevState, data])
     })
   }, [])
+
+  useEffect(() => {
+    let sum = 0;
+    feedback.forEach(el => {
+      sum += Number(el.rate)
+    })
+    sum /= feedback.length
+    setRate(sum)
+  }, [feedback])
 
   const copyHandler = () => {
     setIsCopyFlag(true)
@@ -121,6 +131,9 @@ const SessionPage = () => {
                   <img src={copy.src} alt="copy"/>
                 </CopyToClipboard>
 
+              </p>
+              <p className="status copy StartsElem">
+                Stars: {rateProf}
               </p>
               <h2 className="FeedbackTitle">Feedback List:</h2>
               <ul className="FeedbackListWrapper">

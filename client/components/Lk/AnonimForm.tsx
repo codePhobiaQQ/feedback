@@ -20,6 +20,7 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
   const anonimId = useRef<number>(0)
   const index = useRef<number>(0)
   const [inputValue, setInputValue] = useState<string>("")
+  const [inputRateValue, setInputRateValue] = useState<number>(0)
   const [inputNameValue, setInputNameValue] = useState<string>("")
   const [isNamePopupOpen, setNamePopupOpen] = useState<boolean>(false)
   const [isThanksPopupOpen, setThanksPopupOpen] = useState<boolean>(false)
@@ -35,12 +36,12 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
     try {
       let message;
       if (inputNameValue != "") {
-        message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: inputNameValue, anonim: anonimId.current })
+        message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: inputNameValue, anonim: anonimId.current, rate: inputRateValue })
       } else {
-        message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: "Anonim", anonim: anonimId.current })
+        message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: "Anonim", anonim: anonimId.current, rate: inputRateValue })
       }
       socket.emit('message',
-        { data: { anonimName: inputNameValue, anonim: anonimId.current, value: inputValue, sessionId: session.id, id: message.data.id, createdAt: new Date() } })
+        { data: { anonimName: inputNameValue, anonim: anonimId.current, value: inputValue, sessionId: session.id, id: message.data.id, createdAt: new Date(), rate: inputRateValue } })
 
       // @ts-ignore
       setMessages(prevState => [...prevState, { anonim: anonimId.current, value: inputValue, anonimName: inputNameValue, id: 1 }])
@@ -80,6 +81,7 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
     })
   }, [])
 
+
   return (
     <section className="AnonimFormWrapper">
       <div className="AnonimForm">
@@ -102,6 +104,11 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
             <li onClick={() => fastReactionHandler("Boring")}>Boring</li>
             <li onClick={() => fastReactionHandler("Let’s have a break!")}>Let’s have a break!</li>
           </ul>
+
+          <span className="FastReactionsSpan">Rate:</span>
+          {/*@ts-ignore*/}
+          <input value={inputRateValue} onChange={(e) => setInputRateValue(e.target.value)} min={0} max={5} step={1} type="range"/>
+          <span>{inputRateValue} Stars</span>
         </div>
         <div className="RightSide">
           <h2>

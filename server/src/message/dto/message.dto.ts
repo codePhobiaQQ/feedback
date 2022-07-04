@@ -8,6 +8,7 @@ export class MessageDto {
     if (props.isProfessor) {
       this.isProfessor = props.isProfessor;
     }
+    this.rate = props.rate;
   }
 
   readonly value: string;
@@ -15,6 +16,7 @@ export class MessageDto {
   readonly sessionId: number;
   readonly anonim?: number;
   readonly anonimName?: string;
+  readonly rate?: number;
   readonly isProfessor?: boolean = false;
 }
 
@@ -24,4 +26,5 @@ export class TakeMessageDto {
   readonly userId?: number;
   readonly anonim?: number;
   readonly anonimName?: string;
+  readonly rate?: number;
 }

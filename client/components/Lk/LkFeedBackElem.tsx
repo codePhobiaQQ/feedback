@@ -8,9 +8,9 @@ interface ILkFeedBackElem {
   id: number;
   name: string;
   messages?: string;
-  rate?: number;
   createdAt?: string;
   anonimId?: number;
+  rate?: number;
   isProfessor?: boolean;
 }
 
@@ -36,6 +36,7 @@ const LkFeedBackElem = ({
   return (
     <div className={isProfessor || anonimId == 100 ? "ProfessorColor" : ""}>
       <div className="LeftSide">
+        <span className="StarsForProfessor">Stars: {rate}</span>
         <div className="LeftSideWrapper">
           <h3>{isProfessor || anonimId == 100 ? "Professor" : name}</h3>
           <span>{createdAt?.split('T')[0]}</span>
