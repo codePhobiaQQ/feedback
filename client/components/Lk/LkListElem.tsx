@@ -29,7 +29,7 @@ const LkListElem = ({
         <h4>{TitleSession}</h4>
       </div>
       <div className="RightSide">
-        <button onClick={dellHandler} style={{marginRight: "10px"}}>Dell</button>
+        <button onClick={dellHandler} style={{marginRight: "10px"}}>Delete</button>
         <Link href={`/lk/session/${id}`}>
           <a>
             <button>View Details</button>
