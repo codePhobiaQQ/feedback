@@ -92,7 +92,7 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
       <div className="MyMessages">
         <ul>
           {messages.map((message, index) => (
-            <li className={""} key={"anonimMessage" + index}>{message.value}</li>
+            <li className={message.isProfessor ? "professor" : ""} key={"anonimMessage" + index}>{message.value}</li>
           ))}
         </ul>
       </div>

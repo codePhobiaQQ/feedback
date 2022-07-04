@@ -45,15 +45,23 @@ $ls: 65%
   border-radius: calc(#{$index} * 0.66)
   display: flex
   justify-content: space-between
+  max-height: 40%
+  overflow-y: auto
   ul
     width: 100%
     li
+      &:last-child
       border-radius: calc(#{$index} * 0.46)
-      padding: calc(#{$index} * .5)
+      padding: calc(#{$index} * 0.5)
       background: $accentSecond
+      margin-bottom: calc(#{$index} * 1.5)
       color: #fff
       width: 60%
-
+      &.professor
+        margin-left: auto
+        background-color: $accent
+        color: #000
+        text-align: right
 
 
 .NamePopupWrapper

@@ -5,12 +5,14 @@ import BackSvg from "../../../components/svg/BackSvg";
 import LkListElem from "../../../components/Lk/LkListElem";
 import LkFeedBackElem from "../../../components/Lk/LkFeedBackElem";
 import Chat from "../../../components/Lk/Chat";
+import copy from "./../../../assets/copy.svg";
 import axios from "axios";
 import io from 'socket.io-client';
-import {back_url} from "../../../vars";
+import {back_url, front_url} from "../../../vars";
 import {IListElem} from "../../../components/Lk/LkSessionsList";
 import {useRouter} from "next/router";
 import AnonimForm from "../../../components/Lk/AnonimForm";
+import {CopyToClipboard} from "react-copy-to-clipboard"
 import useTypedSelector from "../../../hooks/useTypedSelector";
 
 export interface IFeedBack {
@@ -20,6 +22,7 @@ export interface IFeedBack {
   rate?: number;
   anonimName?: string;
   anonim?: number;
+  isProfessor?: boolean;
 }
 
 const SessionPage = () => {
@@ -27,6 +30,8 @@ const SessionPage = () => {
   const [feedback, setFeedback] = useState<IFeedBack[]>([])
   const [inputValue, setInputValue] = useState<string>('')
   const userId = useTypedSelector(state => state.user.user.id)
+  const [isCopy, setIsCopy] = useState<string>("")
+  const [isCopyFlag, setIsCopyFlag] = useState<boolean>(false)
 
   const route = useRouter()
 
@@ -35,6 +40,7 @@ const SessionPage = () => {
   async function fetchSessions() {
     try {
       if (route.isReady) {
+        setIsCopy(front_url + route.asPath)
         const id = route.asPath.split('/')[3]
         const {data} = await axios.get(`${back_url}/session/${id}`)
         const feedbackResponse = await axios.get(`${back_url}/message/${id}`)
@@ -66,6 +72,11 @@ const SessionPage = () => {
     })
   }, [])
 
+  const copyHandler = () => {
+    setIsCopyFlag(true)
+    console.log(route.asPath)
+    setIsCopy(route.asPath)
+  }
 
   return (
     <Header>
@@ -101,6 +112,14 @@ const SessionPage = () => {
               <p className="status">
                 <span>Status:</span>
                 {session.status} the session
+              </p>
+              <p className="status copy">
+                <span>Copy Link:</span>
+                <CopyToClipboard text={isCopy}
+                                 onCopy={() => copyHandler()}>
+                  <img src={copy.src} alt="copy"/>
+                </CopyToClipboard>
+
               </p>
               <h2 className="FeedbackTitle">Feedback List:</h2>
               <ul className="FeedbackListWrapper">

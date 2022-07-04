@@ -42,8 +42,7 @@ const LkFeedBackElem = ({
         </h4>
       </div>
       <div className="RightSide">
-        <button>Report</button>
-        <button onClick={clickHandler}>View Details</button>
+        <button onClick={clickHandler}>Open</button>
       </div>
     </div>
   );

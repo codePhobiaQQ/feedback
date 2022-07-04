@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, {useEffect} from "react";
 import { PropsWithChildren } from "react";
-import face from "./../assets/face.png";
+import logo from "./../assets/logo.svg";
 import {motion} from "framer-motion";
 import {FadeInMotionOpacity, FadeInMotion} from "./../motions/FadeMotion"
 import BackSvg from "./../components/svg/BackSvg";
@@ -90,19 +90,20 @@ const Header: React.FC<PropsWithChildren<HeaderI>> = ({ children, isAnonim= fals
               exit="hidden"
               className="Header"
             >
+            <Link href="/lk">
+              <div className="data">
+                <img src={logo.src} alt="logo"/>
+              </div>
+            </Link>
               <div className="ExitWrapper">
                 <div onClick={clickExitHandler}>
                   <BackSvg/>
                   <span>Exit</span>
                 </div>
               </div>
-              <div className="data">
-                <span>Nursultan Askarbekuly</span>
-                <img src={face.src} alt="face"/>
-              </div>
+
             </motion.header>
               : null }
-
             <motion.div
               variants={FadeInMotion(1)}
               initial="hidden"

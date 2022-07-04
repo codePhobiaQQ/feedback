@@ -118,7 +118,7 @@ const RegistrationForm = ({ activeTab, setActiveTab }: IRegisterForm) => {
               />
             </motion.div>
             <motion.button variants={FadeInMotion(6)} type="submit">
-              Log In
+              Sign Up
             </motion.button>
             <motion.p variants={FadeInMotion(7)} className="switcher">
               Already registered?{" "}

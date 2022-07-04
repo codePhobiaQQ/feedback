@@ -29,11 +29,12 @@ const LkCreateSession = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
+      const time = new Date()
       const result = {
         ...data,
-        day: daySelect.current?.getValue()[0].value,
-        month: monthSelect.current?.getValue()[0].value,
-        year: yearSelect.current?.getValue()[0].value
+        day: time.getDay(),
+        month: time.getMonth(),
+        year: time.getFullYear()
       };
       const request = await axios.post(`${back_url}/session/`,
         { ...result },
@@ -45,13 +46,13 @@ const LkCreateSession = () => {
     }
   };
 
-  const daySelect = useRef<any>(null);
-  const monthSelect = useRef<any>(null);
-  const yearSelect = useRef<any>(null);
-
-  const DaysOptions = days();
-  const MonthsOptions = months();
-  const YearsOptions = years();
+  // const daySelect = useRef<any>(null);
+  // const monthSelect = useRef<any>(null);
+  // const yearSelect = useRef<any>(null);
+  //
+  // const DaysOptions = days();
+  // const MonthsOptions = months();
+  // const YearsOptions = years();
 
   return (
     <section className="LkCreateSession">
@@ -70,28 +71,28 @@ const LkCreateSession = () => {
             placeholder="Title of the session"
             type="text"
           />
-          <div className="SelectLine">
-            <Select
-              ref={daySelect}
-              placeholder="Day"
-              name="Day"
-              options={DaysOptions}
-            />
-            <Select
-              placeholder="Month"
-              name="Month"
-              className="Month"
-              options={MonthsOptions}
-              ref={monthSelect}
-            />
-            <Select
-              placeholder="Year"
-              name="Year"
-              ref={yearSelect}
-              className="Year"
-              options={YearsOptions}
-            />
-          </div>
+          {/*<div className="SelectLine">*/}
+          {/*  <Select*/}
+          {/*    ref={daySelect}*/}
+          {/*    placeholder="Day"*/}
+          {/*    name="Day"*/}
+          {/*    options={DaysOptions}*/}
+          {/*  />*/}
+          {/*  <Select*/}
+          {/*    placeholder="Month"*/}
+          {/*    name="Month"*/}
+          {/*    className="Month"*/}
+          {/*    options={MonthsOptions}*/}
+          {/*    ref={monthSelect}*/}
+          {/*  />*/}
+          {/*  <Select*/}
+          {/*    placeholder="Year"*/}
+          {/*    name="Year"*/}
+          {/*    ref={yearSelect}*/}
+          {/*    className="Year"*/}
+          {/*    options={YearsOptions}*/}
+          {/*  />*/}
+          {/*</div>*/}
           <button>Create</button>
         </form>
       </div>
