@@ -30,9 +30,10 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
   }
 
   const sendFeedback = async () => {
+    
+
     try {
       let message;
-      console.log(inputNameValue)
       if (inputNameValue != "") {
         message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: inputNameValue, anonim: anonimId.current })
       } else {
@@ -46,6 +47,9 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
 
       setNamePopupOpen(false)
       setThanksPopupOpen(true)
+      setTimeout(() => {
+        setThanksPopupOpen(false)
+      }, 2000)
     } catch (e) {
       console.log(e)
     }
@@ -152,7 +156,7 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
         {isThanksPopupOpen && <motion.div
           variants={FadeInMotionOpacity(0)}
           onClick={() => setThanksPopupOpen(false)}
-          className="NamePopupWrapper"
+          className="NamePopupWrapper PushPopup"
           initial="hidden"
           animate="visible"
           exit="hidden"
