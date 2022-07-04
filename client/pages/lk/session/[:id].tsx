@@ -129,7 +129,7 @@ const SessionPage = () => {
                 <span>Status:</span>
                 {session.status} the session
               </p>
-              <button className="CloseSession">Close Session</button>
+              {/*<button className="CloseSession">Close Session</button>*/}
               <p className="status copy">
                 <span>Copy Link:</span>
                 <CopyToClipboard text={isCopy}
