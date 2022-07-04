@@ -24,7 +24,7 @@ const LkListElem = ({
       <div className="LeftSide">
         <div className="LeftSideWrapper">
           <h3>{TitleCourse}</h3>
-          <span>{fixNumbs(month)}/{fixNumbs(day)}/{year}</span>
+          <span>{fixNumbs(day)}/{fixNumbs(month)}/{year}</span>
         </div>
         <h4>{TitleSession}</h4>
         <ul className="FastReactions">

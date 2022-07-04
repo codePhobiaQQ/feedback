@@ -32,7 +32,7 @@ const LkCreateSession = () => {
       const time = new Date()
       const result = {
         ...data,
-        day: time.getDay(),
+        day: time.getDay() + 3,
         month: time.getMonth(),
         year: time.getFullYear()
       };
