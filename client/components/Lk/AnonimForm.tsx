@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {IListElem} from "./LkSessionsList";
 import {AnimatePresence, motion} from "framer-motion";
 import {FadeInMotionOpacity, FadeInMotion} from "../../motions/FadeMotion";
@@ -86,7 +86,28 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
           <button onClick={firstSubmit}>Submit</button>
         </div>
         <div className="RightSide">
-          right
+          <h2>
+            <span>Session:</span>
+            <span>{session.TitleSession}</span>
+          </h2>
+          <h2>
+            <span>Course:</span>
+            <span>{session.TitleCourse}</span>
+          </h2>
+          <div className="dateWrap">
+            <p className="date">
+              <span>Date:</span>
+              <span>{session.createdAt?.split('T')[0]}</span>
+            </p>
+            <p className="time">
+              <span>Time:</span>
+              <span>{session.createdAt?.split('T')[1].split('.')[0]}</span>
+            </p>
+          </div>
+          <p className="status">
+            <span>Status:</span>
+            {session.status} the session
+          </p>
         </div>
       </div>
 
