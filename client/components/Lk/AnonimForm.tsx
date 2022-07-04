@@ -30,7 +30,7 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
   }
 
   const sendFeedback = async () => {
-    
+
 
     try {
       let message;
@@ -79,8 +79,8 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
     <section className="AnonimFormWrapper">
       <div className="AnonimForm">
         <div className="LeftSide">
-          <h2><span>Session:</span> {session.TitleSession}</h2>
-          <h2><span>Course:</span>{session.TitleCourse}</h2>
+          {/*<h2><span>Session:</span> {session.TitleSession}</h2>*/}
+          {/*<h2><span>Course:</span>{session.TitleCourse}</h2>*/}
           <input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
