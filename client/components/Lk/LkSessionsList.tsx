@@ -19,6 +19,7 @@ export interface IListElem {
   status?: string;
   fetchSessions?: any;
   userId?: number;
+  createdAt?: string;
 }
 
 const LkSessionsList = () => {

@@ -9,6 +9,7 @@ interface ILkFeedBackElem {
   name: string;
   messages?: string;
   rate?: number;
+  createdAt?: string;
   anonimId?: number;
 }
 
@@ -20,24 +21,27 @@ const LkFeedBackElem = ({
   isChatOpen,
   setWhatMessageOpen,
   setIsChatOpen,
-  anonimId
+  anonimId,
+  createdAt,
 }: ILkFeedBackElem) => {
   const clickHandler = () => {
     setIsChatOpen(true)
     setWhatMessageOpen(anonimId || 100)
   }
 
+  console.log(createdAt)
+
   return (
     <div>
       <div className="LeftSide">
         <div className="LeftSideWrapper">
-          <h3>{name}</h3>
-          <span>05/30/2022</span>
-          <span>14:00</span>
+          <h3>{anonimId == 100 ? "Professor" : name}</h3>
+          <span>{createdAt?.split('T')[0]}</span>
+          <span>{createdAt?.split('T')[1].split('.')[0]}</span>
         </div>
         <h4>
           {messages?.length
-            ? `${messages}...`
+            ? `${messages}`
             : null}
         </h4>
       </div>

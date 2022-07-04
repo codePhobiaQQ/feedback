@@ -32,13 +32,14 @@ const AnonimForm = ({session, socket}: IAnonimForm) => {
   const sendFeedback = async () => {
     try {
       let message;
+      console.log(inputNameValue)
       if (inputNameValue != "") {
         message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: inputNameValue, anonim: anonimId.current })
       } else {
         message = await axios.post(`${back_url}/message`, { value: inputValue, sessionId: session.id, anonimName: "Anonim", anonim: anonimId.current })
       }
       socket.emit('message',
-        { data: { anonimName: inputNameValue, anonim: anonimId.current, value: inputValue, sessionId: session.id, id: message.data.id } })
+        { data: { anonimName: inputNameValue, anonim: anonimId.current, value: inputValue, sessionId: session.id, id: message.data.id, createdAt: new Date() } })
 
       // @ts-ignore
       setMessages(prevState => [...prevState, { anonim: anonimId.current, value: inputValue, anonimName: inputNameValue, id: 1 }])

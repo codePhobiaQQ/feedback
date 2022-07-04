@@ -22,6 +22,7 @@ export interface IFeedBack {
   rate?: number;
   anonimName?: string;
   anonim?: number;
+  createdAt?: string;
   isProfessor?: boolean;
 }
 
@@ -101,18 +102,18 @@ const SessionPage = () => {
               <div className="dateWrap">
                 <p className="date">
                   <span>Date:</span>
-                  <span>{session.day}</span>/<span>{session.month}</span>/
-                  <span>{session.year}</span>
+                  <span>{session.createdAt?.split('T')[0]}</span>
                 </p>
                 <p className="time">
                   <span>Time:</span>
-                  <span>{session.start}</span> - <span>{session.end}</span>
+                  <span>{session.createdAt?.split('T')[1].split('.')[0]}</span>
                 </p>
               </div>
               <p className="status">
                 <span>Status:</span>
                 {session.status} the session
               </p>
+              <button className="CloseSession">Close Session</button>
               <p className="status copy">
                 <span>Copy Link:</span>
                 <CopyToClipboard text={isCopy}
@@ -123,20 +124,22 @@ const SessionPage = () => {
               </p>
               <h2 className="FeedbackTitle">Feedback List:</h2>
               <ul className="FeedbackListWrapper">
-                {feedback.map((feedbackElem, index) => (
+                {feedback.length != 0 ? feedback.map((feedbackElem, index) => (
                   <li className={"LkSessionListElem"} key={"LkListElem" + index}>
                     <LkFeedBackElem
                       id={feedbackElem.id}
-                      name={feedbackElem.name}
+                      name={feedbackElem.anonimName || "Anonim"}
                       messages={feedbackElem.value}
                       anonimId={feedbackElem.anonim || 100}
                       rate={feedbackElem.rate}
+                      createdAt={feedbackElem.createdAt}
                       setIsChatOpen={setIsChatOpen}
                       isChatOpen={isChatOpen}
                       setWhatMessageOpen={setWhatMessageOpen}
                     />
                   </li>
-                ))}
+                )) :
+                <span className="NoMessages">В данной сессии пока нет сообщений!</span>}
               </ul>
               {/*<h3>Send feedback</h3>*/}
               {/*<input value={inputValue} onChange={(e) => setInputValue(e.target.value)} type="text"/>*/}

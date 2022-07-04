@@ -20,11 +20,12 @@ const Chat = ({ isChatOpen, setIsChatOpen, socket, session, anonimId }: IChat) =
   const sendFeedback = async () => {
     try {
       let message;
-      message = await axios.post(`${back_url}/message`, { value: answerValue, sessionId: session.id })
+      message = await axios.post(`${back_url}/message`, { value: answerValue, sessionId: session.id, isProfessor: true })
       socket.emit('message',
-        { data: { value: answerValue, sessionId: session.id, id: message.data.id, anonim: anonimId, isProfessor: true } })
+        { data: { value: answerValue, sessionId: session.id, id: message.data.id, anonim: anonimId, isProfessor: true, createdAt: new Date() } })
 
       setIsChatOpen(false)
+      setAnswerValue("")
     } catch (e) {
       console.log(e)
     }
