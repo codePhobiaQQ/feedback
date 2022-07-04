@@ -76,10 +76,16 @@ const SessionPage = () => {
 
   useEffect(() => {
     let sum = 0;
+    let howRates = 0;
     feedback.forEach(el => {
-      sum += Number(el.rate)
+      if (el.rate) {
+        sum += Number(el.rate)
+        howRates += 1
+      }
     })
-    sum /= feedback.length
+    if (howRates != 0) {
+      sum /= howRates
+    }
     setRate(sum)
   }, [feedback])
 
