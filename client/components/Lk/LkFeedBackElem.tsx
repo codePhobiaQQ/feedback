@@ -11,6 +11,7 @@ interface ILkFeedBackElem {
   rate?: number;
   createdAt?: string;
   anonimId?: number;
+  isProfessor?: boolean;
 }
 
 const LkFeedBackElem = ({
@@ -22,6 +23,7 @@ const LkFeedBackElem = ({
   setWhatMessageOpen,
   setIsChatOpen,
   anonimId,
+  isProfessor,
   createdAt,
 }: ILkFeedBackElem) => {
   const clickHandler = () => {
@@ -32,10 +34,10 @@ const LkFeedBackElem = ({
   console.log(createdAt)
 
   return (
-    <div>
+    <div className={isProfessor || anonimId == 100 ? "ProfessorColor" : ""}>
       <div className="LeftSide">
         <div className="LeftSideWrapper">
-          <h3>{anonimId == 100 ? "Professor" : name}</h3>
+          <h3>{isProfessor || anonimId == 100 ? "Professor" : name}</h3>
           <span>{createdAt?.split('T')[0]}</span>
           <span>{createdAt?.split('T')[1].split('.')[0]}</span>
         </div>
@@ -45,9 +47,12 @@ const LkFeedBackElem = ({
             : null}
         </h4>
       </div>
-      <div className="RightSide">
-        <button onClick={clickHandler}>Open</button>
-      </div>
+      {isProfessor || anonimId == 100
+        ? null
+        : <div className="RightSide">
+            <button onClick={clickHandler}>Open</button>
+          </div>}
+
     </div>
   );
 };

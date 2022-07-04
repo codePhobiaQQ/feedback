@@ -135,6 +135,7 @@ const SessionPage = () => {
                       createdAt={feedbackElem.createdAt}
                       setIsChatOpen={setIsChatOpen}
                       isChatOpen={isChatOpen}
+                      isProfessor={feedbackElem.isProfessor}
                       setWhatMessageOpen={setWhatMessageOpen}
                     />
                   </li>
