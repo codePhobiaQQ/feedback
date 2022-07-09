@@ -7,6 +7,7 @@ import LkFeedBackElem from "../../../components/Lk/LkFeedBackElem";
 import Chat from "../../../components/Lk/Chat";
 import copy from "./../../../assets/copy.svg";
 import axios from "axios";
+import path from "path";
 import io from "socket.io-client";
 import { back_url, front_url } from "../../../vars";
 import { IListElem } from "../../../components/Lk/LkSessionsList";
@@ -65,7 +66,7 @@ const SessionPage = () => {
     setIsChatOpen(true);
   };
 
-  const socket = io(back_url, { transports: ["websocket"] });
+  const socket = io("http://localhost:5000", { transports: ["websocket"] });
 
   useEffect(() => {
     socket.on("message", ({ data }) => {
@@ -91,8 +92,8 @@ const SessionPage = () => {
 
   const copyHandler = () => {
     setIsCopyFlag(true);
-    console.log(route.asPath);
-    setIsCopy(route.asPath);
+    console.log(front_url + "/lk/session/" + route.asPath.split("/")[3]);
+    setIsCopy(front_url + "/lk/session/" + route.asPath.split("/")[3]);
   };
 
   return (
