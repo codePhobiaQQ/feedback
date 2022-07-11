@@ -24,14 +24,12 @@ const LkFeedBackElem = ({
   setIsChatOpen,
   anonimId,
   isProfessor,
-  createdAt,
+  createdAt
 }: ILkFeedBackElem) => {
   const clickHandler = () => {
-    setIsChatOpen(true)
-    setWhatMessageOpen(anonimId || 100)
-  }
-
-  console.log(createdAt)
+    setIsChatOpen(true);
+    setWhatMessageOpen(anonimId || 100);
+  };
 
   return (
     <div className={isProfessor || anonimId == 100 ? "ProfessorColor" : ""}>
@@ -39,21 +37,16 @@ const LkFeedBackElem = ({
         <span className="StarsForProfessor">Stars: {rate}</span>
         <div className="LeftSideWrapper">
           <h3>{isProfessor || anonimId == 100 ? "Professor" : name}</h3>
-          <span>{createdAt?.split('T')[0]}</span>
-          <span>{createdAt?.split('T')[1].split('.')[0]}</span>
+          <span>{createdAt?.split("T")[0]}</span>
+          <span>{createdAt?.split("T")[1].split(".")[0]}</span>
         </div>
-        <h4>
-          {messages?.length
-            ? `${messages}`
-            : null}
-        </h4>
+        <h4>{messages?.length ? `${messages}` : null}</h4>
       </div>
-      {isProfessor || anonimId == 100
-        ? null
-        : <div className="RightSide">
-            <button onClick={clickHandler}>Open</button>
-          </div>}
-
+      {isProfessor || anonimId == 100 ? null : (
+        <div className="RightSide">
+          <button onClick={clickHandler}>Open</button>
+        </div>
+      )}
     </div>
   );
 };

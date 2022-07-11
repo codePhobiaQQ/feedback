@@ -7,7 +7,7 @@ import LkFeedBackElem from "../../../components/Lk/LkFeedBackElem";
 import Chat from "../../../components/Lk/Chat";
 import copy from "./../../../assets/copy.svg";
 import axios from "axios";
-import path from "path";
+// @ts-ignore
 import io from "socket.io-client";
 import { back_url, front_url } from "../../../vars";
 import { IListElem } from "../../../components/Lk/LkSessionsList";
@@ -35,10 +35,9 @@ const SessionPage = () => {
   const [isCopy, setIsCopy] = useState<string>("");
   const [isCopyFlag, setIsCopyFlag] = useState<boolean>(false);
   const [rateProf, setRate] = useState<number>(5);
+  const [isPlay, setIsPlay] = useState<boolean>(false);
 
   const route = useRouter();
-
-  console.log(feedback);
 
   async function fetchSessions() {
     try {
@@ -55,6 +54,16 @@ const SessionPage = () => {
     }
   }
 
+  function play() {
+    const audio = document.getElementById("a1");
+    // @ts-ignore
+    audio?.play();
+    setTimeout(() => {
+      // @ts-ignore
+      audio?.pause();
+    }, 2000);
+  }
+
   useEffect(() => {
     fetchSessions();
   }, [route.isReady]);
@@ -66,10 +75,14 @@ const SessionPage = () => {
     setIsChatOpen(true);
   };
 
-  const socket = io("http://localhost:5000", { transports: ["websocket"] });
+  const socket = io(back_url, { transports: ["websocket"] });
 
   useEffect(() => {
     socket.on("message", ({ data }) => {
+      if (!data.isProfessor) {
+        console.log("here");
+        play();
+      }
       console.log(data);
       setFeedback((prevState) => [...prevState, data]);
     });
@@ -92,7 +105,6 @@ const SessionPage = () => {
 
   const copyHandler = () => {
     setIsCopyFlag(true);
-    console.log(front_url + "/lk/session/" + route.asPath.split("/")[3]);
     setIsCopy(front_url + "/lk/session/" + route.asPath.split("/")[3]);
   };
 
@@ -101,6 +113,10 @@ const SessionPage = () => {
       {userId == session.userId ? (
         <>
           <section className="SessionPage">
+            <audio
+              src={"https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3"}
+              id="a1"
+            ></audio>
             <div className="container">
               <Link href="/lk">
                 <a className={"BackLink"}>
