@@ -57,11 +57,13 @@ const SessionPage = () => {
   function play() {
     const audio = document.getElementById("a1");
     // @ts-ignore
+    audio.currentTime = 0;
+    // @ts-ignore
     audio?.play();
-    setTimeout(() => {
-      // @ts-ignore
-      audio?.pause();
-    }, 2000);
+    // setTimeout(() => {
+    //   // @ts-ignore
+    //   audio?.pause();
+    // }, 3000);
   }
 
   useEffect(() => {
@@ -114,7 +116,9 @@ const SessionPage = () => {
         <>
           <section className="SessionPage">
             <audio
-              src={"https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3"}
+              src={
+                "https://zvukitop.com/wp-content/uploads/2021/03/zvuk-uvedomleniya-imassage-iph.mp3"
+              }
               id="a1"
             ></audio>
             <div className="container">
